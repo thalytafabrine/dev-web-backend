@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/thalytafabrine/dev-web-backend/issues"
   },
-  "homepage": "https://github.com/thalytafabrine/dev-web-backend#readme"
+  "homepage": "https://github.com/thalytafabrine/dev-web-backend#readme",
+  "dependencies": {
+    "express": "^4.16.3"
+  }
 }
