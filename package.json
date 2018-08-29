@@ -1,0 +1,19 @@
+{
+  "name": "dev-web-backend",
+  "version": "1.0.0",
+  "description": "Backend do projeto desenvolvido na disciplina Princípios de Desenvolvimento Web",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/thalytafabrine/dev-web-backend.git"
+  },
+  "author": "Thalyta Fabrine",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/thalytafabrine/dev-web-backend/issues"
+  },
+  "homepage": "https://github.com/thalytafabrine/dev-web-backend#readme"
+}
