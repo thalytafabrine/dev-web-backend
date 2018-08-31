@@ -1,5 +1,6 @@
 const express = require('express')
 const app = express()
+const port = process.env.PORT || 3000;
 
 // criar constantes para as URIs
 // funções que vão fazer as requisições
@@ -13,4 +14,4 @@ app.get('/disciplina/:id/atividade/:id', (req, res) => res.send("Atividade x da 
 
 app.put('/disciplina/:id/atividade/:id', (req, res) => res.send("Submissão da atividade x."))
 
-app.listen(3000, () => console.log('Example app listening on port 3000!'))
+app.listen(port, () => console.log('Example app RESTful API server started on port ' + port + '!'))
