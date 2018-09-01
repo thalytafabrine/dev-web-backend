@@ -1,17 +1,25 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const app = express();
 const port = process.env.PORT || 3000;
 
-// criar constantes para as URIs
-// funções que vão fazer as requisições
+const disciplina = require('./routes/disciplinaRoutes')
+const listaEstudo = require('./routes/listaEstudoRoutes')
+app.use('/disciplina', disciplina)
+app.use('/listaEstudo', listaEstudo)
 
 
-app.get('/disciplina', (req, res) => res.send('Listagem das disciplinas exibida ao aluno.'))
+// ROTAS QUE AINDA DEVEM SER CRIADAS CORRETAMENTE
 
-app.get('/disciplina/:id', (req, res) => res.send('Disciplina específica.'))
+// Rotas para as atividades de uma disciplina específica
+app.get('/disciplina/:idDisciplina/listaEstudo/:idLista', (req, res) => res.send("Atividade x da disciplina escolhida."))
+app.put('/disciplina/:idDisciplina/listaEstudo/:idLista', (req, res) => res.send("Submissão da atividade x."))
 
-app.get('/disciplina/:id/atividade/:id', (req, res) => res.send("Atividade x da disciplina escolhida."))
+// Rota geral para visão inicial do sistema
+app.get('/', (req, res) => res.send("Oi você!"))
 
-app.put('/disciplina/:id/atividade/:id', (req, res) => res.send("Submissão da atividade x."))
+// Rota para perfil
+app.get('/:username', (req, res) => res.send("Esse é o seu perfil!"))
 
-app.listen(port, () => console.log('Example app RESTful API server started on port ' + port + '!'))
+app.listen(port, () => console.log(`Example app RESTful API server started on port ${port}!`))
+
+module.exports = app;

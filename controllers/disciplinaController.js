@@ -1,10 +1,21 @@
-// Get de uma disciplina específica ou todas as disciplinas, se não houver id.
 exports.get = (req, res) => {
     const disciplina = {
-        id: 1,
+        idDisciplina: 1,
         nome: 'Princípios de Desenvolvimento Web',
         professor: 'Gauds'
-    }
-    const response = req.params.id ? disciplina : 'Listagem das disciplinas exibida ao aluno.'
-    res.status(201).send(response);
+    };
+    const response = req.params.idDisciplina ? disciplina : 'Listagem das disciplinas exibida ao aluno.';
+    res.status(200).send(response);
+};
+
+exports.criarDisciplina = (req, res) => {
+    res.status(201).send("Disciplina criada com sucesso!");
+};
+
+exports.atualizarDisciplina = (req, res) => {
+    res.send("Disciplina atualizada.");
+};
+
+exports.excluirDisciplina = (req, res) => {
+    res.send("Disciplina excluída com sucesso!");
 };
