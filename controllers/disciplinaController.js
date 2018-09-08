@@ -1,21 +1,49 @@
-exports.get = (req, res) => {
-    const disciplina = {
-        idDisciplina: 1,
-        nome: 'Princípios de Desenvolvimento Web',
-        professor: 'Gauds'
-    };
-    const response = req.params.idDisciplina ? disciplina : 'Listagem das disciplinas exibida ao aluno.';
-    res.status(200).send(response);
+const Disciplina = require('../models/disciplinaModel');
+
+exports.listarDisciplinas = (req, res) => {
+    Disciplina.find({}, (err, disciplina) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(disciplina);
+    });
 };
 
 exports.criarDisciplina = (req, res) => {
-    res.status(201).send("Disciplina criada com sucesso!");
+    const novaDisciplina = new Disciplina(req.body);
+    novaDisciplina.save((err, disciplina) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(disciplina);
+    });
+};
+
+exports.getDisciplina = (req, res) => {
+    Disciplina.findById(req.params.idDisciplina, (err, disciplina) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(disciplina);
+    });
 };
 
 exports.atualizarDisciplina = (req, res) => {
-    res.send("Disciplina atualizada.");
+    Disciplina.findOneAndUpdate({_id: req.params.idDisciplina}, req.body, {new: true}, (err, disciplina) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(disciplina);
+    });
 };
 
-exports.excluirDisciplina = (req, res) => {
-    res.send("Disciplina excluída com sucesso!");
+exports.apagarDisciplina = (req, res) => {
+    Disciplina.remove({
+        _id: req.params.idDisciplina
+    }, (err, disciplina) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json({ mensagemSucesso: 'Disciplina removida com sucesso.'});
+    });
 };

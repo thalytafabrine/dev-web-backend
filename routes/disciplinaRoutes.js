@@ -1,24 +1,16 @@
-const express = require("express");
-const router = express.Router();
+'use strict';
+module.exports = (app) => {
+    const disciplinaCtrl = require('../controllers/disciplinaController');
 
-const disciplinaCtrl = require('../controllers/disciplinaController');
+    /**
+     * Mapeamento das rotas das disciplinas
+     */
+    app.route('/disciplina')
+        .get(disciplinaCtrl.listarDisciplinas)
+        .post(disciplinaCtrl.criarDisciplina);
 
-/**
- * Mapeamento das rotas das disciplinas
- */
-
-router.get("/", disciplinaCtrl.get);
-
-router.post("/", disciplinaCtrl.criarDisciplina);
-
-router.get("/:idDisciplina", disciplinaCtrl.get);
-
-router.put("/:idDisciplina", disciplinaCtrl.atualizarDisciplina);
-
-router.delete("/:idDisciplina", disciplinaCtrl.excluirDisciplina);
-
-/**
- * Module exports.
- */
-
-module.exports = router;
+    app.route('/disciplina/:idDisciplina')
+        .get(disciplinaCtrl.getDisciplina)
+        .put(disciplinaCtrl.atualizarDisciplina)
+        .delete(disciplinaCtrl.apagarDisciplina);
+};
