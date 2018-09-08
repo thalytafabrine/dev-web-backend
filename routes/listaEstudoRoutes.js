@@ -1,24 +1,16 @@
-const express = require("express");
-const router = express.Router();
+'use strict';
+module.exports = (app) => {
+    const listaEstudoCtrl = require('../controllers/listaEstudoController');
 
-const listaEstudoCtrl = require('../controllers/listaEstudoController');
+    /**
+     * Mapeamento das rotas das disciplinas
+     */
+    app.route('/listaEstudo')
+        .get(listaEstudoCtrl.getListasEstudo)
+        .post(listaEstudoCtrl.criarLista);
 
-/**
- * Mapeamento das rotas das listas de estudo
- */
-
-router.get("/", listaEstudoCtrl.get);
-
-router.post("/", listaEstudoCtrl.criarLista);
-
-router.get("/:idLista", listaEstudoCtrl.get);
-
-router.put("/:idLista", listaEstudoCtrl.atualizarLista);
-
-router.delete("/:idLista", listaEstudoCtrl.excluirLista);
-
-/**
- * Module exports.
- */
-
-module.exports = router;
+    app.route('/listaEstudo/:idLista')
+        .get(listaEstudoCtrl.getListaEstudo)
+        .put(listaEstudoCtrl.atualizarLista)
+        .delete(listaEstudoCtrl.excluirLista);
+};

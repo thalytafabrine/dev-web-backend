@@ -14,7 +14,8 @@ const express = require('express'),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
     Disciplina = require('./models/disciplinaModel'),
-    bodyParser = require('body-parser');
+    bodyParser = require('body-parser')
+    cache = require('memory-cache');
 
 // create a write stream (in append mode)
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})

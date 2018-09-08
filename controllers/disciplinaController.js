@@ -1,7 +1,7 @@
 const Disciplina = require('../models/disciplinaModel');
 
 exports.listarDisciplinas = (req, res) => {
-    Disciplina.find({}, (err, disciplina) => {
+    Disciplina.find((err, disciplina) => {
         if (err) {
             res.send(err);
         }

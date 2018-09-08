@@ -1,21 +1,49 @@
-exports.get = (req, res) => {
-    const lista = {
-        idLista: 1,
-        nome: 'Lista 1º Estágio - Princípios de Desenvolvimento Web',
-        professor: 'Gauds'
-    };
-    const response = req.params.idLista ? lista : 'Listas de estudo que você criou';
-    res.status(200).send(response);
+const ListaEstudo = require('../models/listaEstudoModel');
+
+exports.getListasEstudo = (req, res) => {
+    ListaEstudo.find((err, lista) => {
+        if (err) {
+            res.send(err);
+        }
+        res.status(200).json(lista);
+    });
 };
 
 exports.criarLista = (req, res) => {
-    res.status(201).send("Nova lista criada com sucesso!");
+    const novaLista = new ListaEstudo(req.body);
+    novaLista.save((err, lista) => {
+        if (err) {
+            res.send(err);
+        }
+        res.status(201).json(lista);
+    });
+};
+
+exports.getListaEstudo = (req, res) => {
+    ListaEstudo.findById(req.params.idLista, (err, lista) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(lista);
+    });
 };
 
 exports.atualizarLista = (req, res) => {
-    res.send("Sua lista foi atualizada.");
+    ListaEstudo.findOneAndUpdate({_id: req.params.idLista}, req.body, {new: true}, (err, lista) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(lista);
+    });
 };
 
 exports.excluirLista = (req, res) => {
-    res.send("Lista excluída com sucesso!");
+    ListaEstudo.remove({
+        _id: req.params.idLista
+    }, (err, lista) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json({ mensagemSucesso: 'Lista de estudo removida com sucesso.'});
+    });
 };
