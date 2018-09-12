@@ -1,6 +1,6 @@
 'use strict';
 module.exports = (app) => {
-    const listaEstudoCtrl = require('../controllers/listaEstudoController');
+    const listaEstudoCtrl = require('./listaEstudoController');
 
     /**
      * Mapeamento das rotas das disciplinas

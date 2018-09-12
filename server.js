@@ -13,7 +13,7 @@ const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     mongoose = require('mongoose'),
-    Disciplina = require('./models/disciplinaModel'),
+    Disciplina = require('./src/disciplina/disciplinaModel'),
     bodyParser = require('body-parser')
     cache = require('memory-cache');
 
@@ -28,8 +28,10 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 app.use('/static', express.static(path.join(__dirname, 'static')))
 
-const routes = require('./routes/disciplinaRoutes');
-routes(app);
+const disciplina = require('./src/disciplina/disciplinaRoutes'),
+    listaEstudo = require ('./src/listaEstudo/listaEstudoRoutes');
+disciplina(app);
+listaEstudo(app);
 
 /**
  * Rotas para a atividade - falta criar adequadamente

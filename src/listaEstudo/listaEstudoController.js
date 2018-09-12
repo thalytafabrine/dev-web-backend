@@ -1,4 +1,4 @@
-const ListaEstudo = require('../models/listaEstudoModel');
+const ListaEstudo = require('./listaEstudoModel');
 
 exports.getListasEstudo = (req, res) => {
     ListaEstudo.find((err, lista) => {

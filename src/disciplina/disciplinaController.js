@@ -1,4 +1,4 @@
-const Disciplina = require('../models/disciplinaModel');
+const Disciplina = require('./disciplinaModel');
 
 exports.listarDisciplinas = (req, res) => {
     Disciplina.find((err, disciplina) => {
