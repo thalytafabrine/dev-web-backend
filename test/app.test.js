@@ -14,3 +14,27 @@ describe('Test GET user', () => {
         });
     });
 });
+
+describe('Test GET disciplina', () => {
+    it('deve retornar a lista de todas as disciplinas', () => {
+        request(app)
+        .get('/disciplina')
+        .end(function(err, res) {
+            expect('Content-Type', /json/);
+            expect(res.statusCode).to.be.equal(200);
+            expect(res.text).to.be.equal('[]');
+        });
+    });
+});
+
+describe('Test GET listaEstudo', () => {
+    it('deve retornar a lista de todas as listas de estudo', () => {
+        request(app)
+        .get('/listaEstudo')
+        .end(function(err, res) {
+            expect('Content-Type', /json/);
+            expect(res.statusCode).to.be.equal(200);
+            expect(res.body).to.be.equal([]);
+        });
+    });
+});
