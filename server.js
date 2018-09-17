@@ -8,7 +8,8 @@ const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     disciplina = require('./src/disciplina/disciplinaRoutes'),
-    listaEstudo = require ('./src/listaEstudo/listaEstudoRoutes');
+    listaEstudo = require('./src/listaEstudo/listaEstudoRoutes');
+    swagger = require('./docs/docRoutes');
 
 // create a write stream (in append mode)
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
@@ -23,6 +24,7 @@ app.use('/static', express.static(path.join(__dirname, 'static')))
 
 disciplina(app);
 listaEstudo(app);
+swagger(app);
 
 /**
  * Rotas para a atividade - falta criar adequadamente
