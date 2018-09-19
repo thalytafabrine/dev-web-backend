@@ -1,6 +1,9 @@
 const express = require('express'),
+    cors = require('cors'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
+    passport = require('passport'),
+    session = require('express-session'),
     cache = require('memory-cache'),
     morgan = require('morgan'),
     path = require('path'),
@@ -20,7 +23,31 @@ mongoose.connect('mongodb://localhost/Disciplinabd', {useNewUrlParser: true});
 
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
-app.use('/static', express.static(path.join(__dirname, 'static')))
+app.use('/static', express.static(path.join(__dirname, 'static')));
+
+app.use(cors());
+
+/** Session */
+app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000}, resave: false, saveUninitialized: false}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+passport.use(new LocalStrategy(
+    (username, password) => {
+        User.findOne({username: username}, (err, user) => {
+            if (err) {
+                return done(err);
+            }
+            if (!user) {
+                return done(null, false);
+            }
+            if (!user.verifyPassword(password)) {
+                return done(null, false);
+            }
+            return done(null, user);
+        });
+    }
+));
 
 disciplina(app);
 listaEstudo(app);
