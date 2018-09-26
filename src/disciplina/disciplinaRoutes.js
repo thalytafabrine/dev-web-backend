@@ -1,4 +1,3 @@
-'use strict';
 module.exports = (app) => {
     const disciplinaCtrl = require('./disciplinaController');
 

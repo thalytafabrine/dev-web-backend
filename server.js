@@ -4,6 +4,7 @@ const express = require('express'),
     mongoose = require('mongoose'),
     passport = require('passport'),
     session = require('express-session'),
+    LocalStrategy = require('passport-local').Strategy,
     cache = require('memory-cache'),
     morgan = require('morgan'),
     path = require('path'),
@@ -11,7 +12,10 @@ const express = require('express'),
     app = express(),
     port = process.env.PORT || 3000,
     disciplina = require('./src/disciplina/disciplinaRoutes'),
-    listaEstudo = require('./src/listaEstudo/listaEstudoRoutes');
+    listaEstudo = require('./src/listaEstudo/listaEstudoRoutes'),
+    login = require('./src/autenticacao/loginRoutes'),
+    usuario = require('./src/usuario/usuarioRoutes'),
+    User = require('./src/usuario/usuarioModel'),
     swagger = require('./docs/docRoutes');
 
 // create a write stream (in append mode)
@@ -27,30 +31,38 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 
 app.use(cors());
 
-/** Session */
-app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000}, resave: false, saveUninitialized: false}));
-app.use(passport.initialize());
-app.use(passport.session());
+/** Session
+ *  Provavelmente usarei o Firebase portanto é isto.
+ */
+// app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000}, resave: false, saveUninitialized: false}));
+// app.use(passport.initialize());
+// app.use(passport.session());
 
-passport.use(new LocalStrategy(
-    (username, password) => {
-        User.findOne({username: username}, (err, user) => {
-            if (err) {
-                return done(err);
-            }
-            if (!user) {
-                return done(null, false);
-            }
-            if (!user.verifyPassword(password)) {
-                return done(null, false);
-            }
-            return done(null, user);
-        });
-    }
-));
+// User.verifyPassword = (password) => {
+//     User.password === password ? true : false;
+// };
+
+// passport.use(new LocalStrategy(
+//     (username, password) => {
+//         User.findOne({username: username}, (err, user) => {
+//             if (err) {
+//                 return done(err);
+//             }
+//             if (!user) {
+//                 return done(null, false);
+//             }
+//             if (!user.verifyPassword(password)) {
+//                 return done(null, false);
+//             }
+//             return done(null, user);
+//         });
+//     }
+// ));
 
 disciplina(app);
 listaEstudo(app);
+usuario(app);
+// login(app, passport);
 swagger(app);
 
 /**
