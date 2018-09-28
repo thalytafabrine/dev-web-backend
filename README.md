@@ -7,6 +7,10 @@ Para que o aluno possa resolver as atividades de uma disciplina, basta se matric
 
 #### Para executar a aplicação, é necessário rodar os seguintes comandos:
 
-1. `mongo` para inicializar o seu banco de dados
+1. `mongo` para inicializar o seu banco de dados (no Windows, `mongod`)
 2. `npm install` para atualizar as dependências do sistema
 3. `npm run start` para inicializar o sistema
+
+#### Caso tenha interesse em executar os testes:
+
+* `npm test` (lembre de matar o processo do sistema antes disso :grin:)
