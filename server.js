@@ -10,14 +10,15 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     app = express(),
-    port = process.env.PORT || 3000,
-    disciplina = require('./src/disciplina/disciplinaRoutes'),
+    port = process.env.PORT || 3000;
+
+const disciplina = require('./src/disciplina/disciplinaRoutes'),
     listaEstudo = require('./src/listaEstudo/listaEstudoRoutes'),
     login = require('./src/autenticacao/loginRoutes'),
     usuario = require('./src/usuario/usuarioRoutes'),
     User = require('./src/usuario/usuarioModel'),
     swagger = require('./docs/docRoutes');
-
+    
 // create a write stream (in append mode)
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
 app.use(morgan('combined', {stream: accessLogStream}))
@@ -31,16 +32,10 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 
 app.use(cors());
 
-/** Session
- *  Provavelmente usarei o Firebase portanto é isto.
- */
+/** Session */
 // app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000}, resave: false, saveUninitialized: false}));
 // app.use(passport.initialize());
 // app.use(passport.session());
-
-// User.verifyPassword = (password) => {
-//     User.password === password ? true : false;
-// };
 
 // passport.use(new LocalStrategy(
 //     (username, password) => {

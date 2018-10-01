@@ -1,15 +1,15 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const DisciplinaSchema = new Schema({
-    nome: {
+const SubjectSchema = new Schema({
+    name: {
         type: String,
         required: true
     },
-    professor: {
+    teacher: {
         type: String,
         required: true
     }
 });
 
-module.exports = mongoose.model('Disciplina', DisciplinaSchema);
+module.exports = mongoose.model('Disciplina', SubjectSchema);

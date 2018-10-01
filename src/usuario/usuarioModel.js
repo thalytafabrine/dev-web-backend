@@ -1,20 +1,28 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const UsuarioSchema = new Schema({
+const UserSchema = new Schema({
+    name: String,
     username: { 
         type: String,
-        required: true
+        required: true,
+        unique: true
     },
     password: {
         type: String,
         required: true
     },
-    tipo: {
+    type: {
         type: String,
-        required: true
+        required: true,
+        enum: ['STUDENT', 'TEACHER'],
+        default: ['STUDENT']
     },
-    disciplinas: [Schema.Types.ObjectId]
+    subjects: [Schema.Types.ObjectId]
 });
 
-module.exports = mongoose.model('Usuario', UsuarioSchema);
+UserSchema.methods.verifyPassword = (password) => {
+    return (UserSchema.password === password);
+};
+
+module.exports = mongoose.model('Usuario', UserSchema);
