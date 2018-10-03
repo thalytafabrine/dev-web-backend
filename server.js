@@ -9,7 +9,7 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     app = express(),
-    port = process.env.PORT || 3000;
+    port = process.env.PORT || 8080;
 
 const disciplina = require('./src/disciplina/disciplinaRoutes'),
     listaEstudo = require('./src/listaEstudo/listaEstudoRoutes'),

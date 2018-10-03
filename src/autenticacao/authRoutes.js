@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 const User = require('../usuario/usuarioModel');
 const secret = require('../../config/jwtSecret');
+const bcrypt = require('bcrypt');
 
 module.exports = (app) => {
 
@@ -14,7 +15,7 @@ module.exports = (app) => {
                   res.json({ success: false, message: 'Authentication failed. User not found.' });
                 } else if (user) {
                   // check if password matches - tem que usar o bcrypt pra comparar aqui
-                  if (user.password != req.body.password) {
+                  if (bcrypt.compare(req.body.password, user.password, (err, res) => res)) {
                     res.json({ success: false, message: 'Authentication failed. Wrong password.' });
                   } else {
                     // create a token with only our given payload
