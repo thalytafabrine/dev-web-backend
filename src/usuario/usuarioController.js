@@ -38,7 +38,7 @@ exports.getUsuario = (req, res) => {
 
 exports.atualizarUsuario = (req, res) => {
     Usuario.findOneAndUpdate({
-        _id: req.params.idUsuario
+        username: req.params.username
     }, req.body, {new: true}, (err, usuario) => {
         if (err) {
             res.send(err);
@@ -49,7 +49,7 @@ exports.atualizarUsuario = (req, res) => {
 
 exports.apagarUsuario = (req, res) => {
     Usuario.remove({
-        _id: req.params.idUsuario
+        username: req.params.username
     }, (err, usuario) => {
         if (err) {
             res.send(err);

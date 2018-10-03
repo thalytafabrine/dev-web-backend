@@ -2,10 +2,9 @@ const express = require('express'),
     cors = require('cors'),
     bodyParser = require('body-parser'),
     mongoose = require('mongoose'),
-    passport = require('passport'),
     session = require('express-session'),
-    LocalStrategy = require('passport-local').Strategy,
     cache = require('memory-cache'),
+    auth = require('./src/autenticacao/authRoutes');
     morgan = require('morgan'),
     path = require('path'),
     fs = require('fs'),
@@ -14,9 +13,7 @@ const express = require('express'),
 
 const disciplina = require('./src/disciplina/disciplinaRoutes'),
     listaEstudo = require('./src/listaEstudo/listaEstudoRoutes'),
-    login = require('./src/autenticacao/loginRoutes'),
     usuario = require('./src/usuario/usuarioRoutes'),
-    User = require('./src/usuario/usuarioModel'),
     swagger = require('./docs/docRoutes');
     
 // create a write stream (in append mode)
@@ -37,28 +34,11 @@ app.use(cors());
 // app.use(passport.initialize());
 // app.use(passport.session());
 
-// passport.use(new LocalStrategy(
-//     (username, password) => {
-//         User.findOne({username: username}, (err, user) => {
-//             if (err) {
-//                 return done(err);
-//             }
-//             if (!user) {
-//                 return done(null, false);
-//             }
-//             if (!user.verifyPassword(password)) {
-//                 return done(null, false);
-//             }
-//             return done(null, user);
-//         });
-//     }
-// ));
-
 disciplina(app);
 listaEstudo(app);
 usuario(app);
-// login(app, passport);
 swagger(app);
+auth(app);
 
 /**
  * Rotas para a atividade - falta criar adequadamente
