@@ -1,12 +1,14 @@
 module.exports = (app) => {
     const usuarioCtrl = require('./usuarioController');
+    const auth = require('../autenticacao/authController');
+    const authenticate = auth.authenticate;
+    const authorizeByUsername = auth.authorizeByUsername;
 
     app.route('/user')
-        .get(usuarioCtrl.listarUsuarios)
+        .get(authenticate, usuarioCtrl.listarUsuarios)
         .post(usuarioCtrl.cadastrarUsuario);
     app.route('/user/:username')
-        .get(usuarioCtrl.getUsuario);
-    app.route('/user/:idUsuario')
-        .put(usuarioCtrl.atualizarUsuario)
-        .delete(usuarioCtrl.apagarUsuario);
+        .get(authenticate, usuarioCtrl.getUsuario)
+        .put(authenticate, authorizeByUsername, usuarioCtrl.atualizarUsuario)
+        .delete(authenticate, authorizeByUsername, usuarioCtrl.apagarUsuario);
 };
