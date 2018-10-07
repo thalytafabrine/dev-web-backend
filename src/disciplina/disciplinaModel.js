@@ -9,7 +9,8 @@ const SubjectSchema = new Schema({
     teacher: {
         type: String,
         required: true
-    }
+    },
+    studyLists: [Schema.Types.ObjectId]
 });
 
 module.exports = mongoose.model('Disciplina', SubjectSchema);

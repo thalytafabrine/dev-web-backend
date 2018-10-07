@@ -1,9 +1,6 @@
 module.exports = (app) => {
     const disciplinaCtrl = require('./disciplinaController');
 
-    /**
-     * Mapeamento das rotas das disciplinas
-     */
     app.route('/disciplina')
         .get(disciplinaCtrl.listarDisciplinas)
         .post(disciplinaCtrl.criarDisciplina);
