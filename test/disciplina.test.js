@@ -17,14 +17,14 @@ describe('Test GET disciplina', () => {
 
 describe('Test POST disciplina', () => {
     it('deve retornar a disciplina criada quando é uma disciplina válida', () => {
-        const disciplina = {'nome': 'Princípios de desenvolvimento web', 'professor': 'Gauds'};
+        const disciplina = {'name': 'Princípios de desenvolvimento web', 'teacher': 'Gauds'};
         request(app)
         .post('/disciplina')
         .send(disciplina)
         .end((err, res) => {
             expect(res.statusCode).to.be.equal(201);
-            expect(res.body.nome).to.be.equal(disciplina.nome);
-            expect(res.body.professor).to.be.equal(disciplina.professor);
+            expect(res.body.name).to.be.equal(disciplina.name);
+            expect(res.body.teacher).to.be.equal(disciplina.teacher);
         });
     });
 });

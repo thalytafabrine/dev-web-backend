@@ -17,14 +17,18 @@ describe('Test GET listaEstudo', () => {
 
 describe('Test POST listaEstudo', () => {
     it('deve retornar a lista de estudo criada quando é uma lista válida', () => {
-        const disciplina = {'nome': 'Princípios de desenvolvimento web', 'professor': 'Gauds'};
+        const lista = {
+            'name': 'Conceitos de computação',
+            'terms': ["graduação"],
+            'definitions': ["dor e sofrimento"]};
         request(app)
-        .post('/disciplina')
-        .send(disciplina)
+        .post('/listaEstudo')
+        .send(lista)
         .end((err, res) => {
             expect(res.statusCode).to.be.equal(201);
-            expect(res.body.nome).to.be.equal(disciplina.nome);
-            expect(res.body.professor).to.be.equal(disciplina.professor);
+            expect(res.body.name).to.be.equal(lista.name);
+            expect(res.body.terms).to.be.equal(lista.terms);
+            expect(res.body.definitions).to.be.equal(lista.definitions);
         });
     });
 });
