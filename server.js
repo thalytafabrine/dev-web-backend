@@ -4,7 +4,6 @@ const express = require('express'),
     mongoose = require('mongoose'),
     session = require('express-session'),
     cache = require('memory-cache'),
-    auth = require('./src/autenticacao/authRoutes');
     morgan = require('morgan'),
     path = require('path'),
     fs = require('fs'),
@@ -14,7 +13,8 @@ const express = require('express'),
 const disciplina = require('./src/disciplina/disciplinaRoutes'),
     listaEstudo = require('./src/listaEstudo/listaEstudoRoutes'),
     usuario = require('./src/usuario/usuarioRoutes'),
-    swagger = require('./docs/docRoutes');
+    swagger = require('./docs/docRoutes'),
+    auth = require('./src/autenticacao/authRoutes');
     
 // create a write stream (in append mode)
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
@@ -48,9 +48,6 @@ app.put('/disciplina/:idDisciplina/listaEstudo/:idLista', (req, res) => res.send
 
 // Rota geral para visão inicial do sistema
 app.get('/', (req, res) => res.send("Oi você!"))
-
-//Rota para perfil
-app.get('/user/:username', (req, res) => res.send("Esse é o seu perfil!"))
 
 app.listen(port, () => console.log(`Example app RESTful API server started on port ${port}!`))
 

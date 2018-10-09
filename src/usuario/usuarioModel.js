@@ -18,8 +18,24 @@ const UserSchema = new Schema({
         enum: ['STUDENT', 'TEACHER'],
         default: ['STUDENT']
     },
-    subjects: [Schema.Types.ObjectId],
-    studyLists: [Schema.Types.ObjectId]
+    subjects: {
+        type: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'Disciplina'
+            }
+        ],
+        default: []
+    },
+    studyLists: {
+        type: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'ListaEstudo'
+            }
+        ],
+        default: []
+    }
 });
 
 UserSchema.methods.verifyPassword = (password) => {

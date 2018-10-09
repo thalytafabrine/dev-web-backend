@@ -10,7 +10,15 @@ const SubjectSchema = new Schema({
         type: String,
         required: true
     },
-    studyLists: [Schema.Types.ObjectId]
+    studyLists: {
+        type: [
+            {
+                type: Schema.Types.ObjectId,
+                ref: 'ListaEstudo'
+            }
+        ],
+        default: []
+    }
 });
 
 module.exports = mongoose.model('Disciplina', SubjectSchema);
