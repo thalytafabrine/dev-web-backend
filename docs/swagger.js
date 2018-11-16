@@ -459,26 +459,20 @@ const swaggerDef = {
         'StudyList': {
             'required': [
                 'name',
-                'terms',
-                'definitions'
+                'cards'
             ],
             'properties': {
                 'name': {
                     'type': 'string'
                 },
-                'terms': {
+                'cards': {
                     'type': 'array',
-                    'items': {'type': 'string'}
-                },
-                'definitions': {
-                    'type': 'array',
-                    'items': {'type': 'string'}
+                    'items': {'type': 'Card.ObjectId'}
                 }
             },
             'example': {
                 'name': 'study list 1',
-                'terms': ['computer', 'student'],
-                'definitions': ['machine', 'crazy']
+                'cards': [],
             }
         },
         'Auth': {
