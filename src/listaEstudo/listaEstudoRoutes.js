@@ -3,7 +3,7 @@ module.exports = (app) => {
     const listaEstudoCtrl = require('./listaEstudoController');
 
     /**
-     * Mapeamento das rotas das disciplinas
+     * Mapeamento das rotas das listas de estudo
      */
     app.route('/listaEstudo')
         .get(listaEstudoCtrl.getListasEstudo)
