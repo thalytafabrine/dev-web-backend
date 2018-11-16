@@ -6,7 +6,7 @@ module.exports = (app) => {
      * Mapeamento das rotas dos cards
      */
     app.route('/card')
-        .get(cardCtrl.getCard)
+        .get(cardCtrl.getCards)
         .post(cardCtrl.criarCard);
 
     app.route('/card/:idCard')
