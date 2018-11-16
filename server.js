@@ -8,12 +8,13 @@ const express = require('express'),
     path = require('path'),
     fs = require('fs'),
     app = express(),
-    port = process.env.PORT || 8080;
+    port = process.env.PORT || 8089;
 
 const disciplina = require('./src/disciplina/disciplinaRoutes'),
     listaEstudo = require('./src/listaEstudo/listaEstudoRoutes'),
     usuario = require('./src/usuario/usuarioRoutes'),
     swagger = require('./docs/docRoutes'),
+    card = require('./src/card/cardRoutes'),
     auth = require('./src/autenticacao/authRoutes');
     
 // create a write stream (in append mode)
@@ -29,16 +30,12 @@ app.use('/static', express.static(path.join(__dirname, 'static')));
 
 app.use(cors());
 
-/** Session */
-// app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000}, resave: false, saveUninitialized: false}));
-// app.use(passport.initialize());
-// app.use(passport.session());
-
 disciplina(app);
 listaEstudo(app);
 usuario(app);
 swagger(app);
 auth(app);
+card(app);
 
 /**
  * Rotas para a atividade - falta criar adequadamente

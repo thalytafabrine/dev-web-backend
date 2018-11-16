@@ -2,7 +2,7 @@ const swaggerJSDoc = require('swagger-jsdoc');
 
 const swaggerDef = {
     'basePath': '/',
-    'host': 'localhost:8080',
+    'host': 'localhost:8089',
     'info': {
         'description': 'Sistema com intuito de ajudar os alunos em seus estudos, facilitando a memorização de termos através de quizzes baseados em flashcards.',
         'title': 'Memorize',
