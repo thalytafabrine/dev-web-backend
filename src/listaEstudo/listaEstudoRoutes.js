@@ -13,4 +13,7 @@ module.exports = (app) => {
         .get(listaEstudoCtrl.getListaEstudo)
         .put(listaEstudoCtrl.atualizarLista)
         .delete(listaEstudoCtrl.excluirLista);
+    
+    app.route('/listaEstudo/:idLista/card')
+        .post(listaEstudoCtrl.adicionarCard);
 };

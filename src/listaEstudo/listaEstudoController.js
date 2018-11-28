@@ -1,4 +1,5 @@
 const ListaEstudo = require('./listaEstudoModel');
+const cardCtrl = require('../card/cardController');
 
 exports.getListasEstudo = (req, res) => {
     ListaEstudo.find((err, lista) => {
@@ -47,3 +48,8 @@ exports.excluirLista = (req, res) => {
         res.json({ mensagemSucesso: 'Lista de estudo removida com sucesso.'});
     });
 };
+
+exports.adicionarCard = (req, res) => {
+    const response = cardCtrl.criarCard(req);
+    console.log(response);
+}
