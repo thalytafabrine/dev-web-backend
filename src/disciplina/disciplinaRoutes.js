@@ -9,4 +9,7 @@ module.exports = (app) => {
         .get(disciplinaCtrl.getDisciplina)
         .put(disciplinaCtrl.atualizarDisciplina)
         .delete(disciplinaCtrl.apagarDisciplina);
+
+    app.route('/disciplina/:idDisciplina/listaEstudo')
+        .post(disciplinaCtrl.addListaEstudo);
 };
