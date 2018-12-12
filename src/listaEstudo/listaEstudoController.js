@@ -1,5 +1,5 @@
 const ListaEstudo = require('./listaEstudoModel');
-const cardCtrl = require('../card/cardController');
+const Card = require('../card/cardModel');
 
 exports.getListasEstudo = (req, res) => {
     ListaEstudo.find((err, lista) => {
@@ -50,6 +50,24 @@ exports.excluirLista = (req, res) => {
 };
 
 exports.adicionarCard = (req, res) => {
-    const response = cardCtrl.criarCard(req);
-    console.log(response);
+    let card = new Card(req.body);
+    
+    card.save((err, card) => {
+        if (err) {
+            res.send(err);
+        }
+        
+        Lista.findById(req.params.listaId, (err, lista) => {
+            if (err) {
+                res.send(err);
+            }
+            lista.cards.push(card._id);
+            lista.save((err) => {
+                if (err) {
+                    res.send(err);
+                }
+                res.json(lista);
+            });
+        });
+    });
 }
