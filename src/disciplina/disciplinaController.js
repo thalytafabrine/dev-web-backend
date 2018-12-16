@@ -71,3 +71,12 @@ exports.addListaEstudo = (req, res) => {
         });
     });
 };
+
+exports.getListasDaDisciplina = (req, res) => {
+    Disciplina.findById(req.params.idDisciplina, (err, disciplina) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(disciplina.studyLists);
+    });
+};

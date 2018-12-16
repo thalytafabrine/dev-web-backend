@@ -15,5 +15,6 @@ module.exports = (app) => {
         .delete(listaEstudoCtrl.excluirLista);
     
     app.route('/listaEstudo/:idLista/card')
+        .get(listaEstudoCtrl.getCardsDaLista)
         .post(listaEstudoCtrl.adicionarCard);
 };

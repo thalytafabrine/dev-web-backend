@@ -57,7 +57,7 @@ exports.adicionarCard = (req, res) => {
             res.send(err);
         }
         
-        Lista.findById(req.params.listaId, (err, lista) => {
+        ListaEstudo.findById(req.params.listaId, (err, lista) => {
             if (err) {
                 res.send(err);
             }
@@ -71,3 +71,13 @@ exports.adicionarCard = (req, res) => {
         });
     });
 }
+
+
+exports.getCardsDaLista = (req, res) => {
+    ListaEstudo.findById(req.params.idLista, (err, lista) => {
+        if (err) {
+            res.send(err);
+        }
+        res.json(lista.cards);
+    });
+};

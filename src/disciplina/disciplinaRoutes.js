@@ -11,5 +11,6 @@ module.exports = (app) => {
         .delete(disciplinaCtrl.apagarDisciplina);
 
     app.route('/disciplina/:idDisciplina/listaEstudo')
+        .get(disciplinaCtrl.getListasDaDisciplina)
         .post(disciplinaCtrl.addListaEstudo);
 };
