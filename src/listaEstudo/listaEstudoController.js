@@ -57,7 +57,7 @@ exports.adicionarCard = (req, res) => {
             res.send(err);
         }
         
-        ListaEstudo.findById(req.params.listaId, (err, lista) => {
+        ListaEstudo.findById(req.params.idLista, (err, lista) => {
             if (err) {
                 res.send(err);
             }
