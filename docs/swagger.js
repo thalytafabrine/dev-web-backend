@@ -372,33 +372,6 @@ const swaggerDef = {
                     }
                 }
             }
-        },
-        '/auth': {
-            'post': {
-                'tags': [
-                    'Auth'
-                ],
-                'summary': 'Attempt to log user in system',
-                'produces': [
-                    'application/json'
-                ],
-                'parameters': [
-                    {
-                        'name': 'user',
-                        'in': 'body',
-                        'description': 'User credentials',
-                        'required': true,
-                        'schema': {
-                            '$ref': '#/definitions/Auth'
-                        }
-                    }
-                ],
-                'responses': {
-                    '200': {
-                        'description': "{'message': 'Enjoy your token!'}"
-                    }
-                }
-            }
         }
     },
     'definitions': {
@@ -473,24 +446,6 @@ const swaggerDef = {
             'example': {
                 'name': 'study list 1',
                 'cards': [],
-            }
-        },
-        'Auth': {
-            'required': [
-                'username',
-                'password'
-            ],
-            'properties': {
-                'username': {
-                    'type': 'string'
-                },
-                'password': {
-                    'type': 'string'
-                }
-            },
-            'example': {
-                'username': 'user',
-                'password': '12345'
             }
         }
     }

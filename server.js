@@ -12,10 +12,8 @@ const express = require('express'),
 
 const disciplina = require('./src/disciplina/disciplinaRoutes'),
     listaEstudo = require('./src/listaEstudo/listaEstudoRoutes'),
-    usuario = require('./src/usuario/usuarioRoutes'),
     swagger = require('./docs/docRoutes'),
-    card = require('./src/card/cardRoutes'),
-    auth = require('./src/autenticacao/authRoutes');
+    card = require('./src/card/cardRoutes');
     
 // create a write stream (in append mode)
 let accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), {flags: 'a'})
@@ -32,16 +30,8 @@ app.use(cors());
 
 disciplina(app);
 listaEstudo(app);
-usuario(app);
 swagger(app);
-auth(app);
 card(app);
-
-/**
- * Rotas para a atividade - falta criar adequadamente
- */
-app.get('/disciplina/:idDisciplina/listaEstudo/:idLista', (req, res) => res.send("Atividade x da disciplina escolhida."))
-app.put('/disciplina/:idDisciplina/listaEstudo/:idLista', (req, res) => res.send("Submissão da atividade x."))
 
 // Rota geral para visão inicial do sistema
 app.get('/', (req, res) => res.send("Oi você!"))
